@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html  lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>BOG- Browse, Obtain, Go</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="img/logo1.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700&family=Ubuntu:wght@400;500&display=swap" rel="stylesheet"> 
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+
+    <!-- Topbar Start -->
+    <div th:include="navbar"></div>
+
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
+        <a th:href="@{/home}" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+            <h2 class="m-0 text-primary"><i class="fa fa-car me-3"></i>BOG</h2>
+        </a>
+        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto p-4 p-lg-0">
+                <a th:href="@{/home}" class="nav-item nav-link  ">Home</a>
+                <a th:href="@{/about}" class="nav-item nav-link ">About</a>
+                <a th:href="@{/services}" class="nav-item nav-link ">Services</a>
+                <a th:href="@{/booking}" class="nav-item nav-link ">Booking</a>
+                <a  th:href="@{/contact}" class="nav-item nav-link">Contact</a>
+
+
+            </div>
+            <a th:href="@{/suggest}" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Find Your Car<i class="fa fa-arrow-right ms-3"></i></a>
+        </div>
+    </nav>    <!-- Navbar End -->
+
+
+    <!-- Page Header Start -->
+    <div class="container-fluid page-header mb-5 p-0" style="background-image: url(img/suggest2.jpg);">
+        <div class="container-fluid page-header-inner py-5">
+            <div class="container text-center">
+                <h1 class="display-3 text-white mb-3 animated slideInDown">BOG </h1>
+                <a class="nav-item nav-link active">BROWSE, OBTAIN, GO</a>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center text-uppercase">
+                        <li class="breadcrumb-item"><a th:href="@{/home}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                        <li class="breadcrumb-item text-white active" aria-current="page">Get Suggestion</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+
+    <div class="container-fluid bg-secondary booking my-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container">
+            <div class="row gx-5">
+                <div class="col-lg-6 py-5">
+                    <div class="py-5">
+                        <h1 class="text-white mb-4"> </h1>
+                        <p class="text-white mb-0"> </p>
+
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="bg-primary h-100 d-flex flex-column justify-content-center text-center p-5 wow zoomIn" data-wow-delay="0.6s">
+                        <h1 class="text-white mb-4">What are you looking for 🤔?</h1>
+                        <form th:action="@{/saveAiModel}" method="POST"th:object="${aiModel}">
+                            <div class="row g-3">
+                                <div class="col-12 col-sm-6">
+                                    <select class="form-select border-0" th:field="*{type}"style="height: 55px;">
+                                        <option value="" hidden>Car Type</option>
+                                        <option value="Sedan">Sedan</option>
+                                        <option value="SUV">SUV</option>
+                                        <option value="Hatchback">Hatchback</option>
+                                        <option value="Coupe">Coupe</option>
+                                        <option value="Crossover">Crossover</option>
+                                        <option value="Minivan">Minivan</option>
+                                        <option value="PickUp Truck">PickUp Truck</option>
+                                        <option value="Sports Car">Sports </option>
+                                        <option value="Luxury">Luxury</option>
+                                        <option value="Compact Car">Compact </option>
+                                        <option value="Wagon">Wagon</option>
+                                        <option value="HotHatch">HotHatch</option>
+
+                                    </select>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <select class="form-select border-0" th:field="*{brand}" style="height: 55px;">
+                                        <option value="" hidden>Car Brand</option>
+                                        <option value="Toyota">Toyota</option>
+                                        <option value="Honda">Honda</option>
+                                        <option value="Kia">Kia</option>
+                                        <option value="Ford">Ford</option>
+                                        <option value="Porche">Porche</option>
+                                        <option value="Volkswagen">Volkswagen</option>
+                                        <option value="Nissan">Nissan</option>
+                                        <option value="BMW">BMW</option>
+                                        <option value="Mercedes-Benz">Mercedes-Benz</option>
+                                        <option value="Audi">Audi</option>
+                                        <option value="Hyundai">Hyundai</option>
+                                        <option value="Tesla">Tesla</option>
+                                        <option value="Land Rover">Land Rover</option>
+                                        <option value="Lexus">Lexus</option>
+                                        <option value="Mazda">Mazda</option>
+                                        <option value="Lamborghini">Lamborghini</option>
+                                        <option value="Chevrolet">Chevrolet</option>
+                                        <option value="Ferrari">Ferrari</option>
+                                        <option value="Not specified">Not Specified</option>
+
+
+                                    </select>
+                                </div>
+
+                                <div class="col-12 col-sm-6">
+                                    <select class="form-select border-0"th:field="*{year}" style="height: 55px;">
+                                        <option value="" hidden>Make Year</option>
+                                        <option value="2000-2004">2000-2004</option>
+                                        <option value="2005-2009">2005-2010</option>
+                                        <option value="2010-2015">2010-2015</option>
+                                        <option value="2016">2016</option>
+                                        <option value="2017">2017</option>
+                                        <option value="2018">2018</option>
+                                        <option value="2019">2019</option>
+                                        <option value="2020">2020</option>
+                                        <option value="2021">2021</option>
+                                        <option value="2022">2022</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-12 col-sm-6">
+                                    <select class="form-select border-0" th:field="*{mileage}"style="height: 55px;">
+                                        <option value="" hidden>Power Train </option>
+                                        <option value="Fuel">Fuel</option>
+                                        <option value="Hybrid">Hybrid</option>
+                                        <option value="Diesel">Diesel</option>
+                                        <option value="Electric">Electric</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-12 col-sm-6">
+                                    <select class="form-select border-0" th:field="*{price}"style="height: 55px;" id="priceRange">
+                                        <option value="" hidden>Price Range</option>
+                                        <option value="5,000 - 10,000">5,000 - 10,000</option>
+                                        <option value="10,001 - 20,000">10,001 - 20,000</option>
+                                        <option value="20,001 - 30,000">20,001 - 30,000</option>
+                                        <option value="30,001 - 40,000">30,001 - 40,000</option>
+                                        <option value="40,001 - 50,000">40,001 - 50,000</option>
+                                        <option value="50,001 - 60,000">50,001 - 60,000</option>
+                                        <option value="60,001 - 70,000">60,001 - 70,000</option>
+                                        <option value="70,001 - 80,000">70,001 - 80,000</option>
+                                        <option value="80,001 - 90,000">80,001 - 90,000</option>
+                                        <option value="90,001 - 100,000">90,001 - 100,000</option>
+                                        <option value="100,001 - 200,000">100,001 - 200,000</option>
+                                        <option value="200,001 - 300,000">200,001 - 300,000</option>
+                                        <option value="300,001 - 400,000">300,001 - 400,000</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-12 col-sm-6">
+                                    <select class="form-select border-0" th:field="*{specialAddition}" style="height: 55px;" id="additionalOptions" >
+                                        <option value="" hidden>Choose Additional Features</option>
+                                        <option value="Sunroof">Sunroof</option>
+                                        <option value="Spoiler">Spoiler</option>
+                                        <option value="Leather Seats">Leather Seats</option>
+                                        <option value="Fabric Seats">Fabric Seats</option>
+                                        <option value="Bluetooth Connectivity">Bluetooth Connectivity</option>
+                                        <option value="Backup Camera">Backup Camera</option>
+                                        <option value="Heated Seats">Heated Seats</option>
+                                        <option value="Cooling Seats">Cooling Seats</option>
+                                        <option value="Premium Sound System">Premium Sound System</option>
+                                        <option value="Keyless Entry">Keyless Entry</option>
+                                        <option value="Parking Sensors">Parking Sensors</option>
+                                        <option value="Blind Spot Monitoring">Blind Spot Monitoring</option>
+                                        <option value="Lane Departure Warning">Lane Departure Warning</option>
+                                        <option value="Adaptive Cruise Control">Adaptive Cruise Control</option>
+                                        <option value="Wireless Phone Charging">Wireless Phone Charging</option>
+                                        <option value="Automatic Emergency Braking">Automatic Emergency Braking</option>
+                                        <option value="360-Degree Camera">360-Degree Camera</option>
+                                        <option value="Collision Avoidance System">Collision Avoidance System</option>
+                                        <option value="Rain-Sensing Wipers">Rain-Sensing Wipers</option>
+                                    </select>
+                                </div>
+
+
+
+                                <div class="col-12">
+                                    <button class="btn btn-secondary w-100 py-3" type="submit">Browse, Obtain, Go</button>
+                                </div>
+
+                            </div>
+                            <div class="text-white" th:style="'color: red;'">
+                                <p th:text="${response}"></p>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:include="footer"></div>
+
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/counterup/counterup.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/tempusdominus/js/moment.min.js"></script>
+    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>
